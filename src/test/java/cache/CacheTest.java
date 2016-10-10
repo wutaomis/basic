@@ -3,6 +3,7 @@ package cache;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,6 +20,7 @@ public class CacheTest {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"}); 
 		qp = (QueryProduct) ctx.getBean("queryProduct");
 	}
+	@Ignore
 	@Test
 	public void testCache() {
 		log.info("call first time");

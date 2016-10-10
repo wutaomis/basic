@@ -1,5 +1,6 @@
 package config.mq;
 
+import org.apache.activemq.pool.PooledConnectionFactory;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,12 +12,20 @@ public class ActiveMqConfig {
 	public ActiveMQConnectionFactory activemqConnectionFactory()
 	{
 		ActiveMQConnectionFactory mqCf = new ActiveMQConnectionFactory();
-		mqCf.setBrokerURL("tcp://localhost:61616");
+		mqCf.setBrokerURL("tcp://192.168.12.112:61616");
 		return mqCf;
 	}
 	@Bean
-	public JmsTemplate jmsTemplate(ActiveMQConnectionFactory mqCf)
+	public PooledConnectionFactory activemqPooledConnectionFactory(ActiveMQConnectionFactory mqcf)
 	{
-		return new JmsTemplate(mqCf);
+		PooledConnectionFactory pooledCf = new PooledConnectionFactory(mqcf);
+		return pooledCf;
+	}
+	@Bean
+	public JmsTemplate jmsTemplate(PooledConnectionFactory pooledCf)
+	{
+		JmsTemplate jmsTemplate = new JmsTemplate(pooledCf);
+		jmsTemplate.setReceiveTimeout(10000);
+		return jmsTemplate;
 	}
 }

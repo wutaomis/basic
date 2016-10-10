@@ -9,10 +9,13 @@ import javax.jms.Message;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
+import org.apache.activemq.pool.PooledConnectionFactory;
+import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -35,8 +38,8 @@ public class ActiveMqSendTest {
 	{
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"}); 
 		jmsOperations = (JmsOperations) ctx.getBean("jmsTemplate");
+		PooledConnectionFactory pooledCf = (PooledConnectionFactory) ctx.getBean("activemqPooledConnectionFactory");		
 	}
-
 	@Test
 	public void testActiveMq1Send() {
 		log.info("in testActiveMqSend");
@@ -58,7 +61,12 @@ public class ActiveMqSendTest {
 			TextMessage msg = (TextMessage)jmsOperations.receive("foo.bar");
 			if (null != msg)
 			{
-				log.info(msg);
+				try {
+					log.info(msg.getText());
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else
 			{
