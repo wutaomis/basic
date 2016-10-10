@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.IDao.Tstrfv2Mapper">
+  <resultMap id="BaseResultMap" type="mybatis.domain.Tstrfv2">
+    <id column="transcode" jdbcType="CHAR" property="transcode" />
+    <result column="transname" jdbcType="CHAR" property="transname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    transcode, transname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ebb_tstrfv2
+    where transcode = #{transcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ebb_tstrfv2
+    where transcode = #{transcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="mybatis.domain.Tstrfv2">
+    insert into ebb_tstrfv2 (transcode, transname)
+    values (#{transcode,jdbcType=CHAR}, #{transname,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="mybatis.domain.Tstrfv2">
+    insert into ebb_tstrfv2
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transcode != null">
+        transcode,
+      </if>
+      <if test="transname != null">
+        transname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transcode != null">
+        #{transcode,jdbcType=CHAR},
+      </if>
+      <if test="transname != null">
+        #{transname,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="mybatis.domain.Tstrfv2">
+    update ebb_tstrfv2
+    <set>
+      <if test="transname != null">
+        transname = #{transname,jdbcType=CHAR},
+      </if>
+    </set>
+    where transcode = #{transcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="mybatis.domain.Tstrfv2">
+    update ebb_tstrfv2
+    set transname = #{transname,jdbcType=CHAR}
+    where transcode = #{transcode,jdbcType=CHAR}
+  </update>
+</mapper>

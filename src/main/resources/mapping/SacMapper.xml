@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.IDao.SacMapper">
+  <resultMap id="BaseResultMap" type="mybatis.domain.Sac">
+    <result column="transcode" jdbcType="CHAR" property="transcode" />
+    <result column="servicename" jdbcType="CHAR" property="servicename" />
+  </resultMap>
+  <insert id="insert" parameterType="mybatis.domain.Sac">
+    insert into ebb_sac (transcode, servicename)
+    values (#{transcode,jdbcType=CHAR}, #{servicename,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="mybatis.domain.Sac">
+    insert into ebb_sac
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="transcode != null">
+        transcode,
+      </if>
+      <if test="servicename != null">
+        servicename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="transcode != null">
+        #{transcode,jdbcType=CHAR},
+      </if>
+      <if test="servicename != null">
+        #{servicename,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

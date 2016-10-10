@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!-- spring启用注解自动装配及扫描 -->
+    <context:component-scan base-package="config.cache,config.nosql,config.sql,service"/>
+    <!-- 加载其他配置文件 -->
+	<bean
+		id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<!-- 这里支持多种寻址方式：classpath和file -->
+				<value>classpath:*.properties</value>
+			</list>
+		</property>
+	</bean>
+    <!-- 1.数据源相关配置 -->
+	<!-- 基本DBCP配置 -->
+	<bean id="mysqldbcpPool" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"/>
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+	</bean>
+	<!-- 2.spring jdbc模板类配置(与3.持久层框架配置可以共用，一般二选一)-->
+	<bean id="jdbcTemplate" 
+      class="org.springframework.jdbc.core.JdbcTemplate" abstract="false" lazy-init="false" autowire="default">
+        <property name="dataSource" ref="mysqldbcpPool" />
+    </bean>
+    <!-- 3.持久层框架配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="mysqldbcpPool" />  
+		<!--自动扫描mapping.xml文件   -->
+        <property name="mapperLocations" value="classpath:mapping/*.xml"></property>  
+    </bean>
+	<!--DAO接口所在包名，Spring会自动查找其下的类   -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="mybatis.IDao" />  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>  
+    </bean>
+	<!-- 4.事务相关配置 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="mysqldbcpPool"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+<!--     <cache:annotation-driven/> -->
+<!--     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager"> -->
+<!--         <property name="caches"> -->
+<!--             <set> -->
+<!--                 <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"> -->
+<!--                     <property name="name" value="default"/> -->
+<!--                 </bean> -->
+<!--                 <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"> -->
+<!--                     <property name="name" value="productCache"/> -->
+<!--                 </bean> -->
+<!--             </set> -->
+<!--         </property> -->
+<!--     </bean> -->
+</beans>  
