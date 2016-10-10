@@ -84,9 +84,9 @@ public class JavaBasic implements Serializable {
 		{
 			// log.info("how to access redis");
 			// {
-			// //jedis direct access,¶à¸öÏß³Ì¹²ÏíÒ»¸öjedisÊµÀı»á¿ÉÄÜ³öÏÖÎÊÌâ
-			// //ÎªÃ¿¸öÏß³Ì´´½¨jedisÊµÀı¿ªÏúÌ«´ó£¬Èç¹û´´½¨Ì«¶àµÄÊµÀıÒ²¿ÉÄÜ³öÏÖÎÊÌâ
-			// //jedis clusterÄ¬ÈÏÊ¹ÓÃÏß³Ì³ØÁ¬½Óredis
+			// //jedis direct access,å¤šä¸ªçº¿ç¨‹å…±äº«ä¸€ä¸ªjediså®ä¾‹ä¼šå¯èƒ½å‡ºç°é—®é¢˜
+			// //ä¸ºæ¯ä¸ªçº¿ç¨‹åˆ›å»ºjediså®ä¾‹å¼€é”€å¤ªå¤§ï¼Œå¦‚æœåˆ›å»ºå¤ªå¤šçš„å®ä¾‹ä¹Ÿå¯èƒ½å‡ºç°é—®é¢˜
+			// //jedis clusteré»˜è®¤ä½¿ç”¨çº¿ç¨‹æ± è¿æ¥redis
 			//
 			// JedisCluster jc = RedisUtil.JCFactory();
 			// try

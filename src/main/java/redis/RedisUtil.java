@@ -27,12 +27,12 @@ public class RedisUtil {
 	private GenericObjectPoolConfig initJedisPoolCfg()
 	{
 		GenericObjectPoolConfig poolCfg = new GenericObjectPoolConfig();
-	    // Í¨¹ı×ÊÔ´°üÄÃµ½ËùÓĞµÄkey  
+	    // é€šè¿‡èµ„æºåŒ…æ‹¿åˆ°æ‰€æœ‰çš„key  
 		if (rb != null)
 		{
-			// ÉèÖÃmaxTotal
+			// è®¾ç½®maxTotal
 			poolCfg.setMaxTotal(Integer.valueOf(rb.getString("maxTotal").trim()));
-			// ÉèÖÃmaxIdle
+			// è®¾ç½®maxIdle
 			poolCfg.setMaxTotal(Integer.valueOf(rb.getString("maxIdle").trim()));
 		}
 		else
@@ -57,7 +57,7 @@ public class RedisUtil {
 		jedisClusterNodes.add(new HostAndPort(addressSplit[0].trim(),Integer.valueOf(addressSplit[1].trim())));
 		return jedisClusterNodes;
 	}
-	//Ë«ÖØÍ¬²½ËøÈ·±£Ïß³Ì°²È«
+	//åŒé‡åŒæ­¥é”ç¡®ä¿çº¿ç¨‹å®‰å…¨
 	public static JedisCluster JCFactory()
 	{
 		if (instance == null)

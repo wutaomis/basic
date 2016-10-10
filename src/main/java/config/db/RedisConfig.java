@@ -40,9 +40,9 @@ public class RedisConfig {
 	@Bean
 	public GenericObjectPoolConfig jedisPoolCfg(ResourceBundle rb) {
 		GenericObjectPoolConfig poolCfg = new GenericObjectPoolConfig();
-		// ÉèÖÃmaxTotal
+		// è®¾ç½®maxTotal
 		poolCfg.setMaxTotal(Integer.valueOf(rb.getString("maxTotal").trim()));
-		// ÉèÖÃmaxIdle
+		// è®¾ç½®maxIdle
 		poolCfg.setMaxTotal(Integer.valueOf(rb.getString("maxIdle").trim()));
 		return poolCfg;
 	}
