@@ -5,10 +5,11 @@ import static org.junit.Assert.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ThreadPoolTest {
-
+	@Ignore
 	@Test
 	public void testThreadPool() {
 		ExecutorService pool = Executors.newFixedThreadPool(6);

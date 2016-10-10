@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ConsistentHashTest {
@@ -38,7 +39,7 @@ public class ConsistentHashTest {
 			this.count --;
 		}
 	}
-	
+	@Ignore
 	@Test
 	public void testGetShardInfo() {
 		List<Node> ln = new ArrayList<Node>();

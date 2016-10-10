@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!-- spring启用注解自动装配及扫描 -->
-    <context:component-scan base-package="config.cache,config.nosql,config.sql,service"/>
+    <context:component-scan base-package="config.cache,config.nosql,config.sql,config.mq,service"/>
     <!-- 加载其他配置文件 -->
 	<bean
 		id="propertyConfigurer"

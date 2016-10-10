@@ -2,6 +2,7 @@ package thread;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class WaitTest {
@@ -87,6 +88,7 @@ public class WaitTest {
 			}
 		}
 	}
+	@Ignore
 	@Test
 	public void testWait() {
 		WaitDemo wd = new WaitDemo();

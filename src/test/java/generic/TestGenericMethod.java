@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import cache.CacheTest;
@@ -35,6 +36,7 @@ public class TestGenericMethod {
 			log.info(item);
 		}
 	}
+	@Ignore
 	@Test
 	public void test()
 	{
