@@ -31,7 +31,7 @@ import config.mq.ActiveMqConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=ActiveMqConfig.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) 
-@ActiveProfiles("office")
+@ActiveProfiles("home")
 public class ActiveMqSendTest {
 	private static Logger log = LogManager.getLogger(ActiveMqSendTest.class);
 	@Autowired
@@ -45,6 +45,7 @@ public class ActiveMqSendTest {
 //		jmsOperations = (JmsOperations) ctx.getBean("jmsTemplate");
 //		PooledConnectionFactory pooledCf = (PooledConnectionFactory) ctx.getBean("activemqPooledConnectionFactory");		
 //	}
+	@Ignore
 	@Test
 	public void testActiveMq1Send() {
 		log.info("in testActiveMqSend");

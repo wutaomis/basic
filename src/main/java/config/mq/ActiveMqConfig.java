@@ -9,14 +9,14 @@ import org.springframework.jms.core.JmsTemplate;
 
 @Configuration
 public class ActiveMqConfig {
-//	@Bean
-//	@Profile("home")
-//	public ActiveMQConnectionFactory activemqConnectionFactoryHome()
-//	{
-//		ActiveMQConnectionFactory mqCf = new ActiveMQConnectionFactory();
-//		mqCf.setBrokerURL("tcp://192.168.12.112:61616");
-//		return mqCf;
-//	}
+	@Bean
+	@Profile("home")
+	public ActiveMQConnectionFactory activemqConnectionFactoryHome()
+	{
+		ActiveMQConnectionFactory mqCf = new ActiveMQConnectionFactory();
+		mqCf.setBrokerURL("tcp://192.168.12.112:61616");
+		return mqCf;
+	}
 	@Bean
 	@Profile("office")
 	public ActiveMQConnectionFactory activemqConnectionFactoryOffice()

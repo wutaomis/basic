@@ -8,8 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TextHandler {
-	private static Logger log = LogManager.getLogger(TextHandler.class);
+public class JmsTextHandler {
+	private static Logger log = LogManager.getLogger(JmsTextHandler.class);
 	public void handleText(TextMessage text)
 	{
 		try {

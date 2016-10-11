@@ -1,27 +1,33 @@
 package config.mq;
 
-import org.apache.activemq.pool.PooledConnectionFactory;
-import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jms.core.JmsTemplate;
 
-@Configuration
+//@Configuration
 public class RabbitMqConfig {
 	@Bean
-	public CachingConnectionFactory rabbitmqConnectionFactory()
+	@Profile("home")
+	public CachingConnectionFactory rabbitmqConnectionFactoryHome()
+	{
+		CachingConnectionFactory rabbitmqCf = new CachingConnectionFactory();
+		rabbitmqCf.setHost("192.168.12.112");
+		rabbitmqCf.setPort(5672);
+		return rabbitmqCf;
+	}
+	@Bean
+	@Profile("office")
+	public CachingConnectionFactory rabbitmqConnectionFactoryOffice()
 	{
 		CachingConnectionFactory rabbitmqCf = new CachingConnectionFactory();
 		rabbitmqCf.setHost("192.168.12.110");
 		return rabbitmqCf;
 	}
 	@Bean
-	public JmsTemplate jmsTemplate(CachingConnectionFactory rabbitmqCf)
+	public RabbitTemplate rabbitTemplate(CachingConnectionFactory rabbitmqCf)
 	{
-		JmsTemplate jmsTemplate = new JmsTemplate(pooledCf);
-		jmsTemplate.setReceiveTimeout(10000);
-		return jmsTemplate;
+		RabbitTemplate rabbitTemplate = new RabbitTemplate(rabbitmqCf);
+		return rabbitTemplate;
 	}
 }
