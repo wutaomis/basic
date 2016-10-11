@@ -4,15 +4,25 @@ import org.apache.activemq.pool.PooledConnectionFactory;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jms.core.JmsTemplate;
 
 @Configuration
 public class ActiveMqConfig {
+//	@Bean
+//	@Profile("home")
+//	public ActiveMQConnectionFactory activemqConnectionFactoryHome()
+//	{
+//		ActiveMQConnectionFactory mqCf = new ActiveMQConnectionFactory();
+//		mqCf.setBrokerURL("tcp://192.168.12.112:61616");
+//		return mqCf;
+//	}
 	@Bean
-	public ActiveMQConnectionFactory activemqConnectionFactory()
+	@Profile("office")
+	public ActiveMQConnectionFactory activemqConnectionFactoryOffice()
 	{
 		ActiveMQConnectionFactory mqCf = new ActiveMQConnectionFactory();
-		mqCf.setBrokerURL("tcp://192.168.12.112:61616");
+		mqCf.setBrokerURL("tcp://192.168.12.110:61616");
 		return mqCf;
 	}
 	@Bean

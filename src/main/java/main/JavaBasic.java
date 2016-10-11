@@ -17,8 +17,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import misc.*;
 import product.CacheProduct;
-import redis.RedisUtil;
-import redis.SerializeUtil;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;

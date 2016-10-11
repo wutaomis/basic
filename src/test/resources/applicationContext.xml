@@ -3,6 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:jms="http://www.springframework.org/schema/jms"
     xmlns:tx="http://www.springframework.org/schema/tx"
     xsi:schemaLocation="http://www.springframework.org/schema/beans  
         http://www.springframework.org/schema/beans/spring-beans.xsd  
@@ -10,10 +11,12 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd
         http://www.springframework.org/schema/cache
         http://www.springframework.org/schema/cache/spring-cache.xsd
+        http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!-- spring启用注解自动装配及扫描 -->
-    <context:component-scan base-package="config.cache,config.nosql,config.sql,config.mq,service"/>
+    <context:component-scan base-package="config.cache,config.nosql,config.sql,config.mq,service,service.message"/>
     <!-- 加载其他配置文件 -->
 	<bean
 		id="propertyConfigurer"
@@ -56,6 +59,11 @@
         <property name="dataSource" ref="mysqldbcpPool"/>
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    
+    <!-- jms异步消息处理 -->
+    <jms:listener-container connection-factory="activemqPooledConnectionFactory">
+    	<jms:listener destination="foo.bar" ref="TextHandler" method="handleText"/>
+    </jms:listener-container>
 <!--     <cache:annotation-driven/> -->
 <!--     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager"> -->
 <!--         <property name="caches"> -->

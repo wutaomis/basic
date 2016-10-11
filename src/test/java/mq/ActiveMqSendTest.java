@@ -10,36 +10,41 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.apache.activemq.pool.PooledConnectionFactory;
-import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jms.core.JmsOperations;
 import org.springframework.jms.core.MessageCreator;
-import org.springframework.jms.support.JmsUtils;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import mybatis.IDao.Tstrfv2Mapper;
-import mysql.dao.Tstrfv2Dao;
-import product.CacheProduct;
-import sql.MysqlTest;
+import config.mq.ActiveMqConfig;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes=ActiveMqConfig.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) 
+@ActiveProfiles("office")
 public class ActiveMqSendTest {
 	private static Logger log = LogManager.getLogger(ActiveMqSendTest.class);
+	@Autowired
 	private JmsOperations jmsOperations;
 	
-	@Before
-	public void setupTest()
-	{
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"}); 
-		jmsOperations = (JmsOperations) ctx.getBean("jmsTemplate");
-		PooledConnectionFactory pooledCf = (PooledConnectionFactory) ctx.getBean("activemqPooledConnectionFactory");		
-	}
+	
+//	@Before
+//	public void setupTest()
+//	{
+//		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] {"applicationContext.xml"}); 
+//		jmsOperations = (JmsOperations) ctx.getBean("jmsTemplate");
+//		PooledConnectionFactory pooledCf = (PooledConnectionFactory) ctx.getBean("activemqPooledConnectionFactory");		
+//	}
 	@Test
 	public void testActiveMq1Send() {
 		log.info("in testActiveMqSend");
@@ -53,6 +58,7 @@ public class ActiveMqSendTest {
 			}
 		});
 	}
+	@Ignore
 	@Test
 	public void testActiveMq2Recv() {
 		log.info("in testActiveMqRecv");
