@@ -63,14 +63,13 @@
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
     
-    <!-- jms异步消息处理 -->
-<!--     <jms:listener-container connection-factory="activemqPooledConnectionFactory"> -->
-<!--     	<jms:listener destination="foo.bar" ref="TextHandler" method="handleText"/> -->
-<!--     </jms:listener-container> -->
+    <!-- jms activemq 异步消息处理 -->
+    <jms:listener-container connection-factory="activemqPooledConnectionFactory">
+    	<jms:listener destination="foo.bar" ref="jmsTextHandler"/>
+    </jms:listener-container>
     <!-- rabbitmq配置 -->
-    <!-- 连接服务配置  -->
-   <rabbit:connection-factory id="connectionFactory" host="192.168.12.112" username="guest"
-        password="guest" port="5672"  />
+   <rabbit:connection-factory id="connectionFactory" host="192.168.99.100" username="guest"
+        password="guest" port="32769"  />
         
    <rabbit:admin connection-factory="connectionFactory"/>
    

@@ -14,7 +14,7 @@ import service.message.AmqpProducer;
 
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath*:/applicationContext.xml"})
-@ActiveProfiles("home")
+@ActiveProfiles("office")
 public class RabbitMqTest {
 	@Autowired
 	AmqpProducer mqProducer;

@@ -21,7 +21,8 @@ public class RabbitMqConfig {
 	public CachingConnectionFactory rabbitmqConnectionFactoryOffice()
 	{
 		CachingConnectionFactory rabbitmqCf = new CachingConnectionFactory();
-		rabbitmqCf.setHost("192.168.12.110");
+		rabbitmqCf.setHost("192.168.99.100");
+		rabbitmqCf.setPort(32769);
 		return rabbitmqCf;
 	}
 	@Bean
