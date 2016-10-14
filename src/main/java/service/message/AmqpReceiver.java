@@ -1,12 +1,10 @@
 package service.message;
 
-import javax.jms.TextMessage;
-
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class AmqpReceiver implements MessageListener {
 //public class AmqpReceiver {
 	@Override
